@@ -232,15 +232,19 @@ while True:
 				break
             elif opcionMenu3=='2':
                 print''
-                raw_input('Has seleccionado la opcion 2...\npulsa una tecla para continuar')
+                start_time=time.time()
                 mergeSort(IPC)
                 print IPC
+                print(time.time()-start_time)
+                raw_input('Has seleccionado la opcion 2...\npulsa una tecla para continuar')
                 break
             elif opcionMenu3=='3':
 				print''
-				raw_input('Has seleccionado la opcion 3...\npulsa una tecla para continuar')
+				star_time=time.time()
 				bubbleSort(IPC, Mes, Anio)
 				mostrarListas()
+				print(time.time-start_time)
+				raw_input('Has seleccionado la opcion 3...\npulsa una tecla para continuar')
 				break
             elif opcionMenu3=='9':
                 break
