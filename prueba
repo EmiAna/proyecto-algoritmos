@@ -1,0 +1,270 @@
+#!/usr/bi#n/python
+# -*- cod#ing: utf-8 -*-
+
+import os
+import time
+
+
+
+def menu():
+    """
+    Funcio que limpia la pantalla y muestra nuevamente el menu
+    """
+    os.system('cls') 
+    print "Selecciona una opcion"
+    print "\t1 - Ingreso de IPC"
+    print "\t2 - Mostrar IPC"
+    print "\t3 - Ordenar"
+    print "\t9 - salir"
+                
+def menu1(): #ingreso de ipc    
+    os.system('cls')
+    print'Selecciona una opcion'
+    print'\t1 - Ingreso Manual'
+    print'\t2 - Carga Masiva'
+    print'\t9 - Menu anterior'
+
+IPC = []
+Mes = []
+Anio = []
+    
+def ingresoManual(ipc, mes, anio):
+    IPC.append(ipc)
+    Mes.append(mes)
+    Anio.append(anio)
+    
+def cargaMasiva(ruta):
+    os.system('cls')
+    archivo = open(ruta,'r') #'w' 
+    while True:
+        linea = archivo.readline() #writeline
+        if not linea:
+            break
+        else:
+            arreglo=linea.split()
+            ingresoManual(arreglo[1], arreglo[0], arreglo[2])
+
+def menu4(): #ingreso manual
+	os.system('cls')
+	print 'Seleccione una opcion'
+	print '\t1-Ingresar Datos'
+	print '\t2-Menu anterior'
+    
+def mostrarListas():
+	os.system('cls')
+	longitud=len(IPC)	
+	for i in range(0,longitud):
+	#	print ('Lista de datos #'+str(i))
+	#	print(IPC[i])
+	#	print(Mes[i])
+	#	print(Anio[i])
+		print "%s\t\t%s\t\t\t%s" %(IPC[i], Mes[i], Anio[i])		
+
+def mostrarListas1():
+	os.system('cls')
+	longitud=len(IPC)	
+	for i in range(0,longitud):
+	#	print("\t " + IPC[i] + "\t" + Mes[i] + "\t\t\t" + Anio[i]) 
+		print "%s\t\t%s\t\t\t%s" %(IPC[i], Mes[i], Anio[i]) 
+    
+def menu2():
+	os.system('cls')
+	print 'Seleccione una opcion'
+	print '\t1-Datos Ingresados'
+	print '\t2-Datos Ordenados'
+	print '\t9-Salir'
+
+def menu3(): #menu de ordenar
+    os.system('cls')
+    print'Selecciona una opcion'
+    print'\t1 - QuickSort'
+    print'\t2 - MergeSort'
+    print'\t3 - BubbleSort'
+    print'\t9 - Menu anterior'
+
+def quicksort(lista1,izq,der,lista2,lista3):
+    i=izq
+    j=der
+    x=lista1[(izq+der)/2]
+    while (i<=j):
+        while lista1[i]<x and j<=der:
+            i=i+1
+        while x<lista1[j] and j>izq:
+            j=j-1
+        if i<=j:
+            aux=lista1[i]
+            lista1[i]=lista1[j]
+            lista1[j]=aux
+            temp2=lista2[i]
+            lista2[i]=lista2[j]
+            lista2[j]=temp2
+            temp3=lista3[i]
+            lista3[i]=lista3[j]
+            lista3[j]=temp3
+            i=i+1
+            j=j-1
+        if izq<j:
+            quicksort(lista1,izq,j,lista2,lista3)
+        if i<der:
+            quicksort(lista1,i,der,lista2,lista3)
+	
+
+def bubbleSort(lista1,lista2,lista3):
+    for recorrido in range(1,len(lista1)):
+        for posicion in range(len(lista1)-recorrido):
+            if lista1[posicion]<lista1[posicion+1]:
+                temp=lista1[posicion]
+                lista1[posicion]=lista1[posicion+1]
+                lista1[posicion+1]=temp
+                temp2=lista2[posicion]
+                lista2[posicion]=lista2[posicion+1]
+                lista2[posicion+1]=temp2
+                temp3=lista3[posicion]
+                lista3[posicion]=lista3[posicion+1]
+                lista3[posicion+1]=temp3
+    
+
+def mergeSort(alist):                                                                          
+    if len(alist)>1:
+        mid = len(alist)//2
+        lefthalf = alist[:mid]
+        righthalf = alist[mid:]
+
+        mergeSort(lefthalf)
+        mergeSort(righthalf)
+
+        i=0
+        j=0
+        k=0
+        while i < len(lefthalf) and j < len(righthalf):
+            if lefthalf[i] < righthalf[j]:
+                alist[k]=lefthalf[i]
+                i=i+1
+            else:
+                alist[k]=righthalf[j]
+                j=j+1
+            k=k+1
+
+        while i < len(lefthalf):
+            alist[k]=lefthalf[i]
+            i=i+1
+            k=k+1
+
+        while j < len(righthalf):
+            alist[k]=righthalf[j]
+            j=j+1
+            k=k+1
+
+
+while True:
+    # Mostramos el menu
+    menu()
+    # solicituamos una opcion al usuario
+    opcionMenu = raw_input("inserta un numero valor >> ")
+    if opcionMenu=="1": #opcion de ingresar datos
+        print ""
+        raw_input("Has pulsado la opcion 1...\npulsa una tecla para continuar")
+        while True:
+            menu1()
+            opcionMenu1 = raw_input('inserta un numero valor >>')
+            if opcionMenu1=='1': #opcion de ingreso manual
+                print''
+                raw_input('Has seleccionado la opcion 1...\npulsa una tecla para continuar')
+                while True:
+                    menu4()
+                    opcionMenu4=raw_input('inserta un numero valor >>')
+                    if opcionMenu4=='1':
+						os.system('cls')
+						try:
+							ipc=float(raw_input('Ingrese IPC: '))
+							
+						except ValueError:
+							print('Ingrese solo numeros')
+						try:
+							mes=str(raw_input('Ingrese el mes: '))
+							
+						except ValueError:
+							print('Ingrese solo nombres')
+						try:
+							anio=int(raw_input('Ingrese el anio: '))
+							
+						except ValueError:
+							print('Ingrese solo numeros')
+						ingresoManual(ipc, mes, anio)
+						os.system('cls')
+						print "\t\t\tDesea ingresar mas datos"
+						print "\t\t\t1. Si"
+						print "\t\t\t2. No"
+						opcionMenu4==raw_input("Ingrese una opcion: ")
+                    elif opcionMenu4=='2':
+                        break
+                    else:
+                        print
+                        raw_input('No has seleccionado ninguna opcioncorrecta...\npulsa una tecla para continuar')
+            elif opcionMenu1=='2': #opcion de carga masiva
+                print''
+                raw_input('Has seleccionado la opcion 2...\npulsa una tecla para continuar')
+                cargaMasiva('C:\Python27\proyecto.mate.txt')
+                mostrarListas1()
+            elif opcionMenu1=='9':
+                break
+            else:
+                print''
+                raw_input('No has seleccionado ninguna opcion correcta...\npulsa una tecla para continuar')
+    elif opcionMenu=="2": #opcion de mostrar ipc
+		print ""
+		raw_input("Has pulsado la opcion 2...\npulsa una tecla para continuar")
+		while True:
+			menu2()
+			opcionmenu2=raw_input('inserta un numero valor: ')
+			if opcionmenu2=='1':
+				mostrarListas1()
+				raw_input("Has pulsado la opcion 2...\npulsa una tecla para continuar")
+			elif opcionmenu2=='2':
+				mostrarListas()
+				raw_input("Has pulsado la opcion 2...\npulsa una tecla para continuar")
+			elif opcionmenu2=='9':
+				break
+			else:
+				print''
+				raw_input('No has seleccionado ninguna opcion correcta...\npulsa una tecla para continuar')
+    elif opcionMenu=="3": #opcion de ordenar
+        print ""
+        raw_input("Has pulsado la opcion 3...\npulsa una tecla para continuar")
+        while True:
+            menu3()
+            opcionMenu3 = raw_input('inserta un numero valor >>')
+            if opcionMenu3=='1':
+				print''
+				start_time=time.time()
+				quicksort(IPC, 0, len(IPC)-1, Mes, Anio)
+				mostrarListas()
+				print((time.time()-start_time))
+				raw_input('Has seleccionado la opcion 1...\npulsa una tecla para continuar')
+				break
+            elif opcionMenu3=='2':
+				print''
+				start_time=time.time()
+				mergeSort(IPC)
+				print IPC
+				print(time.time()-start_time)
+				raw_input('Has seleccionado la opcion 2...\npulsa una tecla para continuar')
+				break
+            elif opcionMenu3=='3':
+				print''
+				start_time=time.time()
+				bubbleSort(IPC, Mes, Anio)
+				mostrarListas()
+				print(time.time()-start_time)
+				raw_input('Has seleccionado la opcion 3...\npulsa una tecla para continuar')
+				break
+            elif opcionMenu3=='9':
+                break
+            else:
+                print''
+                raw_input('No has seleccionado ninguna opcion correcta...\npulsa una tecla para continuar')
+    elif opcionMenu=="9":
+        break
+    else:
+        print ""
+        raw_input("No has pulsado ninguna opcion correcta...\npulsa una tecla para continuar")
